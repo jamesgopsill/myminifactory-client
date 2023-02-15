@@ -1,4 +1,4 @@
-import { keysToSnake } from "./format-keys.js"
+import { keysToCamel, keysToSnake } from "./format-keys.js"
 import type { HttpResponse, MyMiniFactoryClient } from "./index.js"
 import { parseDates } from "./parse-dates.js"
 
@@ -46,10 +46,10 @@ export async function fetchIt<T>(
 	const r = (await fetch(request)) as HttpResponse<T>
 	r.content = undefined
 	if (r.ok && r.status === 200) {
-		if (r.headers.get("Content-Type") === "application/json") {
+		if (r.headers.get("Content-Type")?.includes("application/json")) {
 			let content = await r.json()
-			content = keysToSnake(content)
-			content = parseDates(content)
+			content = keysToCamel(content)
+			parseDates(content)
 			r.content = content
 		}
 	}

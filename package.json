@@ -6,12 +6,21 @@
 	"main": "./dist/cjs/index.js",
 	"module": "./dist/esm/index.js",
 	"keywords": [
-		"Eiger API",
-		"Markforged"
+		"MyMiniFactory",
+		"3D Printing"
 	],
 	"author": "James Gopsill",
 	"license": "MIT",
 	"private": false,
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/jamesgopsill/myminifactory-client"
+	},
+	"homepage": "https://jamesgopsill.github.io/myminifactory-client",
+	"funding": {
+		"type": "individual",
+		"url": "https://github.com/sponsors/jamesgopsill"
+	},
 	"files": [
 		"dist/**/*"
 	],

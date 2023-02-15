@@ -14,6 +14,6 @@ export async function collections(
 }
 
 export async function collection(this: MyMiniFactoryClient, id: string) {
-	const url = `${this._url}/collection/${id}`
+	const url = `${this._url}/collections/${id}`
 	return this._fetch<Collection>("GET", url)
 }

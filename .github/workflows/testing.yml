@@ -25,3 +25,5 @@ jobs:
         run: pnpm install
       - name: Run Tests
         run: pnpm test
+        env:
+          MYMINIFACTORY_API_KEY: ${{secrets.MYMINIFACTORY_API_KEY}

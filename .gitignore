@@ -2,3 +2,6 @@ node_modules/
 dist/
 docs/
 scratch/
+
+test-auth.json
+.DS_Store

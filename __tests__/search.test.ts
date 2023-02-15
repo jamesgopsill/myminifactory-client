@@ -1,17 +1,16 @@
 import { MyMiniFactoryClient, SearchParams } from "../src/index.js"
+import { auth } from "./test.config.js"
 
 let c: MyMiniFactoryClient
 
 beforeAll(() => {
-	c = new MyMiniFactoryClient()
+	c = new MyMiniFactoryClient(auth.apiKey)
 })
 
-test(`Search`, async () => {
+test(`GET /search`, async () => {
 	const search: SearchParams = {
 		q: "test",
 	}
 	const r = await c.search(search)
-	console.log(r.status, r.statusText)
-	console.log(r.content)
 	expect(r.ok).toBe(true)
 })

@@ -1,4 +1,4 @@
-const dateKeys = ["publishedAt", "createdAt"]
+const dateKeys = ["publishedAt", "createdAt", "date"]
 
 export const parseDates = (obj: any) => {
 	Object.keys(obj).forEach((key) => {
@@ -16,7 +16,11 @@ export const parseDates = (obj: any) => {
 			}
 		}
 		// if it is an object then process it
-		if (typeof obj[key] == "object" && Array.isArray(obj[key]) == false) {
+		if (
+			typeof obj[key] == "object" &&
+			Array.isArray(obj[key]) == false &&
+			obj[key] != null
+		) {
 			parseDates(obj[key])
 		}
 	})

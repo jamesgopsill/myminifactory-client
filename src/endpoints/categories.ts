@@ -5,7 +5,7 @@ export async function categories(
 	page: number = 1,
 	perPage: number = 20
 ) {
-	const url = `${this._url}/category`
+	const url = `${this._url}/categories`
 	const params = {
 		page,
 		perPage,
@@ -14,6 +14,6 @@ export async function categories(
 }
 
 export async function category(this: MyMiniFactoryClient, id: string) {
-	const url = `${this._url}/category/${id}`
+	const url = `${this._url}/categories/${id}`
 	return this._fetch<Category>("GET", url)
 }

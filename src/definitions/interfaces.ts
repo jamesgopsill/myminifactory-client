@@ -40,22 +40,51 @@ export interface Paginated<T> {
 export interface Object {
 	id: number
 	url: string
-	archiveDownloadUrl: string
-	parentId: number
 	name: string
 	visibility: Visibility
-	description: string
+	visibilityName: string
+	listed: boolean
+	status: number
+	statusName: string
+	description: string | null
+	descriptionHtml: string
+	printingDetails: string | null
+	printingDetailsHtml: string | null
+	featured: boolean
+	support: boolean
+	complexity: unknown | null
+	complexityName: string | null
+	dimensions: string | null
+	materialQuantity: string | null
+	images: Image[]
 	views: number
 	likes: number
 	publishedAt: Date
-	featured: string
-	complexity: number
-	dimensions: string
-	materialQuantity: string
-	designer: Designer
-	images: Image[]
-	files: File[]
-	categories: []
+	tags: string[]
+	licenses: License[]
+	filters: string[]
+	fileMode: number
+	categories: {
+		totalCount: 0
+		items: unknown[]
+	}
+	files: {
+		totalCount: number
+		items: unknown[]
+	}
+	prints: {
+		totalCount: 0
+		items: unknown[]
+	}
+	designer: User
+	license: string
+	price: {
+		currency: string
+		symbol: string
+		value: string
+	} | null
+	purchaseUrl: string | null
+	archiveDownloadUrl: string | null
 }
 
 export interface Category {
@@ -63,13 +92,17 @@ export interface Category {
 	slug: string
 	url: string
 	name: string
+	popularity: number
+	bannerUrl: string | null
 	children: {
 		totalCount: number
-		items: PartialCategory[]
+		items: Category[]
 	}
-	parent: PartialCategory
-	tags: string[]
-	licenses: License[]
+	parent: Category
+	objects?: {
+		totalCount: number
+		items: Object[]
+	}
 }
 
 export interface License {
@@ -87,9 +120,14 @@ export interface File {
 	id: number
 	filename: string
 	description: string
-	downloadUrl: string
-	thumbnailUrl: string
-	size: string
+	status: number
+	statusName: string
+	size: number
+	patchUrl: string
+	thumbnailUrl: string | null
+	downloadUrl: string | null
+	createdAt: Date
+	render360Urls: string[]
 }
 
 export interface Image {
@@ -106,24 +144,67 @@ export interface ImageDetails {
 	height: string
 }
 
-export interface Designer {
-	username: string
-	name: string
-	profileUlr: string
-	avatarUrl: string
-	avatarThumbnilUrl: string
-	bio: string
-	website: string
-}
-
 export interface User {
 	username: string
 	name: string
+	isAdmin: boolean
+	isPremium: boolean
+	isStoreManager: boolean
+	isCampaignManager: boolean
 	profileUrl: string
+	profileSettingsUrl: string
 	avatarUrl: string
 	avatarThumbnailUrl: string
+	avatarSmallThumbnailUrl: string
+	coverUrl: string
+	website: string | null
 	bio: string
+	followings: number
+	followers: number
+	likes: number
+	views: number
+	objects: number
+	totalPrints: number
+	totalCollections: number
+	totalObjectsStore: number
+	printingSince: {
+		date: Date
+		timezoneType: number
+		timezone: string
+	} | null
+	socialNetworks: {
+		totalCount: number
+		items: SocialNetwork[]
+	}
+	printers: {
+		totalCount: number
+		items: Printer[]
+	}
+}
+
+export interface SocialNetwork {
+	id: number
+	name: string
+	value: string
+}
+
+export interface Printer {
+	id: number
+	name: string
+	automaticSlicing: boolean
+	premium: boolean
+	model: string
+	brand: string
+	image: string | null
 	website: string
+	nozzleDiameter: number
+	dimensions: Dimensions
+}
+
+export interface Dimensions {
+	x: number
+	y: number
+	z: number
 }
 
 export interface Collection {
@@ -131,17 +212,21 @@ export interface Collection {
 	name: string
 	slug: string
 	url: string
-	owner: Designer
+	owner: {
+		username: string
+		name: string
+		isAdmin: string
+		isPremium: string
+		isStoreManager: string
+		isCampaignManager: string
+	}
 	featured: boolean
+	isPublic: boolean
 	public: boolean
-	createdAt: string
-	description: string
-	coverObject: Object
-	images: Image[]
-	files: File[]
-	categories: Category[]
-	tags: string[]
-	licenses: License[]
+	createdAt: Date
+	description: string | null
+	objImg: string[]
+	totalObjects: number
 }
 
 export interface UploadStatus {
